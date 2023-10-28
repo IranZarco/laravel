@@ -1,4 +1,29 @@
 body
 {
-background: linear-gradient(to bottom, #48ff00 100%, #e6ff04 10%);
+    background: #E55D87;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5FC3E4, #E55D87);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5FC3E4, #E55D87); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+}
+
+
+#BotonEliminar{
+    margin:5px ;
+}
+
+h2{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: aliceblue;
+    text-shadow: 1px  0px 0px black,
+               0px  1px 0px black,
+              -1px  0px 0px black,
+               0px -1px 0px black;
+}
+table{
+    border-collapse: separate;
+    border-spacing: 5px;
+    background-color: white;
+    color: #FC466B;
 }
