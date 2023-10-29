@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 
 
+
+
 class HomeController extends Controller
 {
     /**
@@ -31,7 +33,7 @@ class HomeController extends Controller
     public function home()
      {
         $products = Product::paginate(12);
-        return view('welcome');
+        return view('welcome', compact('products'));
         
      }
 }

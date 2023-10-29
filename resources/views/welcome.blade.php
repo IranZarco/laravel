@@ -27,24 +27,25 @@
         <section class="py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-md4 mb-4">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://i.kinja-img.com/image/upload/c_fit,q_60,w_645/513c7346bc0ed61c82da107933c587a9.jpg" class="card-img-top" alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    @foreach ($products as $product)
+                        <div class="col-md-4 mb-4">
+                                <div class="card">
+                                <img
+                                src="{{asset('img/cometas.jpg')}}" alt="" class="card-img-top">
+                                <div class="card-body">
+                                <h5>{{$product->nombre}}</h5>
+                                <p>{{truncateText($product->descripcion), 3}}</p>
+                                </div>
                             </div>
                         </div>
+                        @endforeach
+                        <div class="d-flex justify-content-center">
+                    {{ $products->links() }}
                     </div>
                 </div>
-                <div class="d-flex-justify-content-center"></div>
             </div>
         </section>
-    </main>
-
-    <main class="contrainer"></main>
-    <main class="contrainer"></main>
+        </main>
 
     <script>
         $(document).ready(function(){

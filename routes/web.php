@@ -33,6 +33,8 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::get('/products/{id}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
