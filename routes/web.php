@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class, 'home'])->name('raiz');
 
-Route::get('product2/index', [ProductController2::class, 'index'])->name('product2.index');
-
 Route::get('products/list', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('product/create', [ProductController::class, 'create'])->name('products.create');
