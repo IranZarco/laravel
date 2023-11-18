@@ -5,7 +5,7 @@
         "description": "Descripcion",
         "contact": {
             "name": "Iran Cardenas Zarco",
-            "email": "iran@iran.com"
+            "email": "iran55599@gmail.com"
         },
         "license": {
             "name": "Licencia",
@@ -17,7 +17,7 @@
         "/api/products": {
             "get": {
                 "tags": [
-                    "products"
+                    "Products"
                 ],
                 "operationId": "ba200e07b9a266ea70688d7765f1836a",
                 "responses": {
@@ -28,12 +28,48 @@
                         "description": "ha ocurrido un error."
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Registrar un producto por identificador",
+                "operationId": "7f4819cdd5a46c30f83611f723d06af0",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    },
+                                    "precio": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "stock": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto registrado exitosamente"
+                    }
+                }
             }
         },
         "/api/products/{id}": {
             "get": {
                 "tags": [
-                    "products"
+                    "Products"
                 ],
                 "summary": "Obtener el producto por identificador",
                 "description": "Obtiene un producto especifico segun su identificador.",
@@ -53,6 +89,98 @@
                 "responses": {
                     "200": {
                         "description": "Producto exitos."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Editar un producto por identificador",
+                "description": "Editar un producto existente",
+                "operationId": "42cd364b526bf52898c66aa96e692490",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identificador único de producto",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "description": "Nombre del producto",
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "description": "Descripción del producto",
+                                        "type": "string"
+                                    },
+                                    "precio": {
+                                        "description": "Precio del producto",
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "stock": {
+                                        "description": "Cantidad en stock del producto",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Producto editado exitosamente"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Eliminar el producto por identificador",
+                "operationId": "b36266b4378bbecae0bfb7a4cb01b6c1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "NO CONTENT"
+                    },
+                    "200": {
+                        "description": "OPERATION SUCCEFUL",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Se pudo realizar correctamente la operación"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }

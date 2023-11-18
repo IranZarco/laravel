@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/products',[ApiProductController::class,'index']);
 Route::get('products/{id}',[ApiProductController::class,'getProductById']);
+////////////////////////////////////////////////////////////////////////////////
+Route::put('products/{id}',[ApiProductController::class,'update']);
+Route::delete('products/{id}',[ApiProductController::class,'destroy']);
+Route::post('products',[ApiProductController::class,'store']);
