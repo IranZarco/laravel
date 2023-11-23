@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
             $table->decimal('total', 8, 2);
+            $table->softDeletes();
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -23,8 +24,12 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+
     public function down(): void
     {
-        Schema::dropIfExists('cart');
+        Schema::table('cart', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+    
     }
 };

@@ -11,7 +11,7 @@ class CartItem extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = "cart_item";
+    protected $table = "cart_items";
 
     protected $primaryKey = "id";
 
@@ -22,10 +22,10 @@ class CartItem extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function cart(){
-        return $this -> BelongsTo(Cart::class);
+        return $this->belongsTo(Cart::class);
     }
     public function product(){
-        return $this -> BelongsTo(Product::class);
+        return $this ->belongsTo(Product::class);
     }
 }
 

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cart extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use HasFactory;
 
     protected $table = "cart";
 
@@ -22,9 +22,9 @@ class Cart extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function user(){
-        return $this -> HasMany(User::class);
+        return $this ->hasMany(User::class);
     }
-    public function cartitem(){
-        return $this -> HasMany(CartItem::class);
+    public function cartItems(){
+        return $this->hasMany(CartItem::class);
     }
 }
