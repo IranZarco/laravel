@@ -133,12 +133,17 @@ class ApiProductController extends Controller
         ]);
 
         $cliente = new Product();
-        $cliente->nombre   = $request->nombre;
+        $cliente->id = $request->id;
+        $cliente->nombre = $request->nombre;
         $cliente->descripcion = $request->descripcion;
-        $cliente->precio  = $request->precio;
+        $cliente->precio = $request->precio;
         $cliente->stock = $request->stock;
         $cliente->save();
 
+        return response()->json([
+            'message' => 'Producto registrado exitosamente',
+            'product' => $cliente
+        ]);
     }
 
     /**

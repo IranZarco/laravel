@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController2;
+use App\Http\Controllers\CartItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,10 @@ Route::post('products/update',[ProductController::class, 'update'])->name('produ
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
 Route::get('/products/{id}/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/search_products', [HomeController::class, 'search'])->name('products.searchs');
+
+Route::get('add_cart', [App\Http\Controllers\CartItemController::class, 'add_cart'])->name('cart.add');
 
 
 

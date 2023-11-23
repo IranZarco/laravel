@@ -35,6 +35,7 @@
                                 <div class="card-body">
                                 <h5>{{$product->nombre}}</h5>
                                 <p>{{truncateText($product->descripcion), 3}}</p>
+                                <a href="#" data-identificador="{{ $product->id}}" class="btn-primary add_cart">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
@@ -58,6 +59,29 @@
                 }
             });
         });
+    </script>
+
+    <script>
+    $(document).ready(function(){
+                $('.add_cart').click(function(){
+                    $data = $(this).data("identificador");
+
+                    $.ajax({
+                        url: '{{ route('cart.add') }}',
+                        method: 'GET',
+                        data:{
+                            product_id : $data
+                        },
+                        success: function(data){
+                            alert('se realizo correctamente');
+                        },
+                        erros: function(error){
+                            console.log('AQUI')
+                        }
+                    });
+                });
+            });
+
     </script>
  @endsection
 
