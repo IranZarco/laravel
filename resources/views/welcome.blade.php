@@ -52,19 +52,6 @@
         </section>
     </main>
 
-    <h2>Carrito de Compras</h2>
-    <ul>
-        @foreach($cart as $item)
-            <li>{{ $item['nombre'] }} - Cantidad: {{ $item['cantidad'] }} - Precio: ${{ $item['precio'] * $item['cantidad'] }}</li>
-        @endforeach
-        @if(count($cart) > 0)
-            <form action="/cart/checkout" method="post">
-                @csrf
-                <button type="submit">Realizar Compra</button>
-            </form>
-        @endif
-    </ul>
-
     <script>
         $(document).ready(function(){
             $('#search-toggle-btn').click(function(){

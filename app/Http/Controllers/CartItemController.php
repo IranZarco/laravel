@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class CartItemController extends Controller
 {
-    // app/Http/Controllers/CartController.php
-
-
 
 public function index()
 {
@@ -21,6 +18,19 @@ public function index()
     $products = Product::all();
 
     return view('welcome', compact('cart', 'products'));
+}
+
+public function removeFromCart($productId)
+{
+    $cart = session('cart', []);
+
+    $cart = array_values(array_filter($cart, function ($item) use ($productId) {
+        return $item['id'] != $productId;
+    }));
+
+    session(['cart' => $cart]);
+
+    return redirect('/');
 }
 
 public function addToCart(Request $request)

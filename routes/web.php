@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ProductController2;
 use App\Http\Controllers\CartItemController;
 use Illuminate\Support\Facades\Route;
@@ -35,13 +36,27 @@ Route::get('/products/{id}/destroy', [ProductController::class, 'destroy'])->nam
 
 Route::get('/search_products', [HomeController::class, 'search'])->name('products.searchs');
 
-Route::get('add_cart', [App\Http\Controllers\CartItemController::class, 'add_cart'])->name('cart.add');
+Route::get('add_cart', [CartItemController::class, 'add_cart'])->name('cart.add');
 
-Route::get('/', [App\Http\Controllers\CartItemController::class, 'index']);
+Route::get('/', [CartItemController::class, 'index']);
 
-Route::post('/cart/add', [App\Http\Controllers\CartItemController::class, 'addToCart']);
+Route::post('/cart/add', [CartItemController::class, 'addToCart']);
 
-Route::post('/cart/checkout', [App\Http\Controllers\CartItemController::class, 'checkout']);
+Route::delete('/cart/remove/{productId}', [CartItemController::class, 'removeFromCart']);
+
+Route::post('/cart/checkout', [CartItemController::class, 'checkout'])->middleware('auth');
+
+///////////////////////////////////////////////777
+
+Route::get('/carrito', [CarritoController::class, 'carrito']);
+
+Route::post('/cart/add', [CarritoController::class, 'addToCart']);
+
+Route::delete('/cart/remove/{productId}', [CarritoController::class, 'removeFromCart']);
+
+Route::post('/cart/checkout', [CarritoController::class, 'checkout'])->middleware('auth');
+
+
 
 
 

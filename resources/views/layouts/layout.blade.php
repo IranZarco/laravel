@@ -65,6 +65,7 @@
                     @endguest
                 </ul>
             </div>
+            <a href="{{ url('/carrito') }}"  class="navbar-brand">🛒</a>
         </div>
     </nav>
 
