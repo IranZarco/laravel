@@ -1,34 +1,72 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Cart;
+use App\Models\Product;
 use App\Models\CartItem;
+use App\Models\Cart;
+use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
 
+
 class CartItemController extends Controller
 {
-    public function add_cart(Request $request){
-        $product_id = $request->product_id;
-        $user_id= 1;
-        $sessionCartId =  Session::get('cart_id');
+    // app/Http/Controllers/CartController.php
 
-        if($sessionCartId == null){
-            $cart = Cart::create([
-                'user_id' => $user_id,
-                'total' => 1
-            ]);
-            Session::put('cart_id', $cart->id );
-        }
 
-        $cartCreado = CartItem::create([
-            'cart_id' => Session::get('cart_id'),
-            'product_id' => $product_id,
-            'cantidad' => 1
+
+public function index()
+{
+    $cart = session('cart', []);
+    $products = Product::all();
+
+    return view('welcome', compact('cart', 'products'));
+}
+
+public function addToCart(Request $request)
+{
+    $productId = $request->input('product_id');
+    $cantidad = $request->input('cantidad', 1);
+
+    $product = Product::find($productId);
+
+    $cart = session('cart', []);
+
+    $cart[] = [
+        'id' => $product->id,
+        'nombre' => $product->nombre,
+        'precio' => $product->precio,
+        'cantidad' => $cantidad,
+    ];
+
+    session(['cart' => $cart]);
+
+    return redirect('/');
+}
+
+public function checkout()
+{
+    // Guardar la información del carrito en la base de datos
+    $cart = session('cart', []);
+
+    $user_id= 1;
+    $cartModel = Cart::create(['total' => 0, 'user_id' => $user_id]);
+
+    foreach ($cart as $item) {
+        $product = Product::find($item['id']);
+
+        CartItem::create([
+            'cart_id' => $cartModel->id,
+            'product_id' => $item['id'],
+            'cantidad' => $item['cantidad'],
+            'total' => $item['cantidad'] * $item['precio'],
         ]);
-
-        dd('termina');
     }
+
+    // Limpiar el carrito de la sesión
+    session(['cart' => []]);
+
+    return redirect('/')->with('success', 'Compra exitosa');
+}
+
 }

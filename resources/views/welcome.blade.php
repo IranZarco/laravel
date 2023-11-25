@@ -27,26 +27,43 @@
         <section class="py-5">
             <div class="container">
                 <div class="row">
-                    @foreach ($products as $product)
+                    @foreach($products as $product)
                         <div class="col-md-4 mb-4">
-                                <div class="card">
-                                <img
-                                src="{{asset('img/cometas.jpg')}}" alt="" class="card-img-top">
+                            <div class="card">
+                                <img src="{{asset('img/cometas.jpg')}}" alt="{{ $product->nombre }}" class="card-img-top">
                                 <div class="card-body">
-                                <h5>{{$product->nombre}}</h5>
-                                <p>{{truncateText($product->descripcion), 3}}</p>
-                                <a href="#" data-identificador="{{ $product->id}}" class="btn-primary add_cart">Agregar al carrito</a>
+                                <h5>{{ $product->nombre }}</h5>
+                                <p>{{truncateText($product->descripcion)}}</p>
+                                <p>Precio: ${{ $product->precio }}</p>
+                                <form action="/cart/add" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <label for="quantity">Cantidad:</label>
+                                    <input type="number" name="cantidad" value="1" min="1">
+                                    <p></p>
+                                    <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                        <div class="d-flex justify-content-center">
-                    {{ $products->links() }}
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
-        </main>
+    </main>
+
+    <h2>Carrito de Compras</h2>
+    <ul>
+        @foreach($cart as $item)
+            <li>{{ $item['nombre'] }} - Cantidad: {{ $item['cantidad'] }} - Precio: ${{ $item['precio'] * $item['cantidad'] }}</li>
+        @endforeach
+        @if(count($cart) > 0)
+            <form action="/cart/checkout" method="post">
+                @csrf
+                <button type="submit">Realizar Compra</button>
+            </form>
+        @endif
+    </ul>
 
     <script>
         $(document).ready(function(){
@@ -84,5 +101,3 @@
 
     </script>
  @endsection
-
- 

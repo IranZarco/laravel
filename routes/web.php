@@ -37,6 +37,13 @@ Route::get('/search_products', [HomeController::class, 'search'])->name('product
 
 Route::get('add_cart', [App\Http\Controllers\CartItemController::class, 'add_cart'])->name('cart.add');
 
+Route::get('/', [App\Http\Controllers\CartItemController::class, 'index']);
+
+Route::post('/cart/add', [App\Http\Controllers\CartItemController::class, 'addToCart']);
+
+Route::post('/cart/checkout', [App\Http\Controllers\CartItemController::class, 'checkout']);
+
+
 
 
 
