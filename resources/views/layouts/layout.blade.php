@@ -66,6 +66,7 @@
                 </ul>
             </div>
             <a href="{{ url('/carrito') }}"  class="navbar-brand">🛒</a>
+            <a href="{{ url('/carrito/index') }}"  class="navbar-brand">Lista</a>
         </div>
     </nav>
 

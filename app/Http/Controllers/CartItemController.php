@@ -78,5 +78,53 @@ public function checkout()
 
     return redirect('/')->with('success', 'Compra exitosa');
 }
+    public function data(){
+        $cart = CartItem::with ('product')->get();
+        
+        return view ('index',['cart' => $cart]);
+    
+    }
+
+    ////////////////////////////////////////////////////////////////////7
+
+    public function edit($cart)
+    {
+
+        $cart = CartItem::find($cart);
+        return view('update', compact('cart'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        
+        try {
+            $validateData = $request->validate([
+                'nombre' =>  'required|string|max:50',
+                'cantidad'  => 'required|numeric|min:0|max:10000',
+                'precio'  =>  'required|numeric|min:0|max:10000',
+            ]);
+            Pro::query()->whereid($request->id)->update([
+                'nombre' =>  $request->nombre,
+                'cantidad'  =>  $request->cantidad,
+                'precio'  =>  $request->precio,
+            ]);
+        } catch (Throwable $e) {
+
+
+            dd($e);
+
+            return false;
+        }
+
+        return redirect()->route('index');
+        
+    }
 
 }

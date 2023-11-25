@@ -50,11 +50,15 @@ Route::post('/cart/checkout', [CartItemController::class, 'checkout'])->middlewa
 
 Route::get('/carrito', [CarritoController::class, 'carrito']);
 
-Route::post('/cart/add', [CarritoController::class, 'addToCart']);
+Route::get('/carrito/index', [CartItemController::class, 'data']);
 
 Route::delete('/cart/remove/{productId}', [CarritoController::class, 'removeFromCart']);
 
 Route::post('/cart/checkout', [CarritoController::class, 'checkout'])->middleware('auth');
+
+Route::get('/carrito/update', [CartItemController::class, 'update']);
+
+Route::get('/carrito/{id}/edit', [CartItemController::class, 'edit'])->name('carrito.edit');
 
 
 
